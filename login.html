@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unlock your surprise by logging in!</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #080710;
+      overflow: hidden;
+    }
+
+    .background {
+      width: 430px;
+      height: 520px;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .shape {
+      height: 100px;
+      width: 100px;
+      position: absolute;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
+    .shape:nth-child(1) {
+      background: linear-gradient(#1845ad, #23a2f6);
+      left: -80px;
+      top: -80px;
+      animation: moveShape1 5s infinite;
+    }
+
+    .shape:nth-child(2) {
+      background: linear-gradient(to right, #ff512f, #f09819);
+      right: -30px;
+      bottom: -80px;
+      animation: moveShape2 5s infinite;
+    }
+
+    @keyframes moveShape1 {
+      0% {
+        left: -80px;
+        top: -80px;
+      }
+      50% {
+        left: 80px;
+        top: 80px;
+      }
+      100% {
+        left: -80px;
+        top: -80px;
+      }
+    }
+
+    @keyframes moveShape2 {
+      0% {
+        right: -30px;
+        bottom: -80px;
+      }
+      50% {
+        right: 80px;
+        bottom: 80px;
+      }
+      100% {
+        right: -30px;
+        bottom: -80px;
+      }
+    }
+
+    .gift, .heart {
+      position: absolute;
+      font-size: 40px;
+      color: white;
+      animation: float 8s infinite;
+    }
+
+    .heart {
+      left: 50px;
+      top: 50px;
+      animation-delay: 2s;
+    }
+
+    .gift {
+      right: 70px;
+      top: 100px;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-50px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    form {
+      height: 520px;
+      width: 400px;
+      background-color: rgba(255, 255, 255, 0.13);
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+      padding: 50px 35px;
+      z-index: 1;
+    }
+
+    form * {
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      outline: none;
+      border: none;
+    }
+
+    form h3 {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 42px;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-top: 30px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    input {
+      display: block;
+      height: 50px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.07);
+      border-radius: 3px;
+      padding: 0 10px;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 300;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    input:focus {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
+    }
+
+    ::placeholder {
+      color: #e5e5e5;
+    }
+
+    button {
+      margin-top: 50px;
+      width: 100%;
+      background-color: #ffffff;
+      color: #080710;
+      padding: 15px 0;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .social {
+      margin-top: 30px;
+      display: flex;
+    }
+
+    .social div {
+      background: red;
+      width: 150px;
+      border-radius: 3px;
+      padding: 5px 10px 10px 5px;
+      background-color: rgba(255, 255, 255, 0.27);
+      color: #eaf0fb;
+      text-align: center;
+    }
+
+    .social div:hover {
+      background-color: rgba(255, 255, 255, 0.47);
+    }
+
+    .social .fb {
+      margin-left: 25px;
+    }
+
+    .social i {
+      margin-right: 4px;
+    }
+
+    /* Error message style */
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+           /* Music Controls */
+           .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(106, 76, 147, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .music-controls:hover {
+            transform: scale(1.1);
+        }
+
+        .music-controls i {
+            color: #6a4c93;
+            font-size: 24px;
+        }
+ @media (max-width: 768px) {
+     
+   .music-controls #love-song{
+    top: 20px;
+    right: 20px;
+  }
+    form {
+        width: 60%;
+        padding: 40px 20px;
+        position: absolute;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+
+    form h3 {
+        font-size: 22px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input {
+        height: 45px;
+        font-size: 12px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px 0;
+    }
+}
+@media (max-width: 426px) {
+  .music-controls{
+    top: 20px;
+    right: 20px;
+  }
+    form {
+        width: 80%;
+        padding: 40px 20px;
+        position: absolute;
+      transform: translate(0%, 0%);
+      top: 10%;
+      left: 12%;
+    }
+
+    form h3 {
+        font-size: 22px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input {
+        height: 45px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px 0;
+    }
+}
+
+
+@media (max-width: 321px) {
+  .music-controls{
+    top: 20px;
+    right: 20px;
+  }
+    form {
+        width: 100%;
+        padding: 40px 20px;
+        position: absolute;
+      transform: translate(0%, 0%);
+      top: 10%;
+      left: 13%;
+    }
+
+    form h3 {
+        font-size: 22px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input {
+        height: 45px;
+    }
+
+    button {
+        font-size: 16px;
+        padding: 12px 0;
+    }
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="heart">&#10084;</div> <!-- Heart symbol -->
+    <div class="gift">&#127873;</div> <!-- Gift symbol -->
+  </div>
+
+  <audio id="love-song" autoplay loop>
+    <source src="log.mp3" type="audio/mp3">
+</audio>
+<div class="music-controls" id="music-toggle">
+  <i class="fas fa-volume-up" id="music-icon"></i> <!-- ondra renda asaigal bgm -->
+</div>
+
+  <form id="loginForm">
+    <h3>Unlock your surprise by log in!</h3>
+
+    <label for="username">Username</label>
+    <input type="text" placeholder="Your name or your nickname" id="username" onfocus="playBackgroundMusic()">
+    
+
+    <label for="password">Password</label>
+    <input type="password" placeholder="Your have to guess the password" id="password">
+
+    <button type="submit">Reveal My Surprise</button>
+
+    <div class="error" id="error-message"></div> <!-- Error message -->
+  </form>
+  <script>
+    const validUsername = "Huki"; 
+
+    const validPasswordHash = "29b4d5a15987b5c178c6b2c61d2c519dc7d99ab17eacd31f2abcd70301ffa7cd"; 
+
+  async function enteringthepassword(password) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+  return hashHex;
+} 
+    // Handle form submission
+    document.getElementById("loginForm").addEventListener("submit", async function(event) {
+      event.preventDefault(); // Prevent form from refreshing the page
+
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const errorMessage = document.getElementById("error-message");
+
+      const enteredPasswordHash = await enteringthepassword(password);
+
+      // Check if username and hashed password match
+      if (username === validUsername && enteredPasswordHash === validPasswordHash) {
+        // Set sessionStorage to track the login status
+        sessionStorage.setItem("isLoggedIn", "true");
+
+        // Redirect to index.html or any other page after successful login
+        window.location.href = "index.html";
+      } else {
+        // Display an error message if credentials are incorrect
+        errorMessage.textContent = "Invalid username💔 or password🥺. Please try again🙃.";
+      }
+    });
+
+         // Music controls
+const musicToggle = document.getElementById('music-toggle');
+const musicIcon = document.getElementById('music-icon');
+const backgroundMusic = document.getElementById('love-song');
+let isMusicPlaying = true;
+
+function playBackgroundMusic() {
+    backgroundMusic.play().catch(e => console.log('Audio play error:', e));
+    musicIcon.classList.remove('fa-volume-mute');
+    musicIcon.classList.add('fa-volume-up');
+}
+
+
+musicToggle.addEventListener('click', function() {
+    if (isMusicPlaying) {
+        backgroundMusic.pause();
+        musicIcon.classList.remove('fa-volume-up');
+        musicIcon.classList.add('fa-volume-mute');
+    } else {
+        backgroundMusic.play().catch(e => console.log('Audio play error:', e));
+        musicIcon.classList.remove('fa-volume-mute');
+        musicIcon.classList.add('fa-volume-up');
+    }
+    isMusicPlaying = !isMusicPlaying;
+});
+
+window.addEventListener('load', function() {
+    if (window.innerWidth <= 768) {  // Mobile view check (You can adjust the width as needed)
+        backgroundMusic.play();
+        musicIcon.classList.remove('fa-volume-mute');
+        musicIcon.classList.add('fa-volume-up');
+        isMusicPlaying = true;  // Update the state since music is paused
+    }
+});
+  </script>
+</body>
+</html>
